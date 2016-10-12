@@ -84,14 +84,14 @@ CGFloat const kCalendarDayViewMinHeight = 60;
 - (void)setM_Model:(CalendarDayViewModel *)m_Model{
     _m_Model = m_Model;
     
-    self.s_BackCircleImgView.image = [self imageWithColor:m_Model.backCircleColor];
-    self.s_NumberLabel.textColor = m_Model.numberColor;
-    self.s_LunarLabel.textColor = m_Model.lunarColor;
+    self.s_BackCircleImgView.image = [self imageWithColor:m_Model.m_BackCircleColor];
+    self.s_NumberLabel.textColor = m_Model.m_NumberColor;
+    self.s_LunarLabel.textColor = m_Model.m_LunarColor;
     
-    self.s_NumberLabel.text = m_Model.numberString;
-    self.s_LunarLabel.text = m_Model.lunarString;
+    self.s_NumberLabel.text = m_Model.m_NumberString;
+    self.s_LunarLabel.text = m_Model.m_LunarString;
     
-    self.s_BottomDotsView.m_DotsColorArray = m_Model.dotsColorArray;
+    self.s_BottomDotsView.m_DotsColorArray = m_Model.m_DotsColorArray;
 }
 
 - (UIImage *)imageWithColor:(UIColor *)color{

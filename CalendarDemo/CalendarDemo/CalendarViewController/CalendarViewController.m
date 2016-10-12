@@ -23,7 +23,7 @@
 @property (nonatomic, strong) MASConstraint *s_CalendarViewTopConstraint;
 @property (nonatomic, strong) MASConstraint *s_RemindTableViewHeightConstraint;
 @property (nonatomic, strong) MASConstraint *s_BottomPaddingViewHeightConstraint;
-@property (nonatomic, assign) NSInteger rowNumber;
+@property (nonatomic, assign) NSInteger s_RowNumber;
 @end
 
 @implementation CalendarViewController
@@ -41,7 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.rowNumber = 5;
+    self.s_RowNumber = 5;
     [self setupViews];
     [self setupConstraints];
 }
@@ -59,10 +59,10 @@
     
 #warning message 模拟数据加载
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.rowNumber = 10;
+        self.s_RowNumber = 10;
         [self reloadRemindTableViewData];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            self.rowNumber = 40;
+            self.s_RowNumber = 40;
             [self reloadRemindTableViewData];
         });
     });
@@ -236,7 +236,7 @@
 #pragma mark - tableview代理方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.rowNumber;
+    return self.s_RowNumber;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identify = @"cell";

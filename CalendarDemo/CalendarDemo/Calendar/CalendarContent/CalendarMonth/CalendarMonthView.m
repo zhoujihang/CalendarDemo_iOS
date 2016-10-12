@@ -84,7 +84,7 @@
 }
 - (void)calendarDayViewDidClick:(CalendarDayView *)view{
     if ([self.m_Delegate respondsToSelector:@selector(calendarMonthView:didClickWithDateComponent:)]) {
-        [self.m_Delegate calendarMonthView:self didClickWithDateComponent:[view.m_Model.dateComponents copy]];
+        [self.m_Delegate calendarMonthView:self didClickWithDateComponent:[view.m_Model.m_DateComponents copy]];
     }
 }
 

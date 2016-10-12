@@ -13,21 +13,21 @@
 @interface CalendarDayViewModel : NSObject
 
 /// 圈圈颜色
-@property (nonatomic, strong) UIColor *backCircleColor;
+@property (nonatomic, strong) UIColor *m_BackCircleColor;
 /// 数字颜色
-@property (nonatomic, strong) UIColor *numberColor;
+@property (nonatomic, strong) UIColor *m_NumberColor;
 /// 农历颜色
-@property (nonatomic, strong) UIColor *lunarColor;
+@property (nonatomic, strong) UIColor *m_LunarColor;
 
 /// 数字内容
-@property (nonatomic, copy) NSString *numberString;
+@property (nonatomic, copy) NSString *m_NumberString;
 /// 农历内容
-@property (nonatomic, copy) NSString *lunarString;
+@property (nonatomic, copy) NSString *m_LunarString;
 /// 底部点点视图的颜色
-@property (nonatomic, strong) NSArray *dotsColorArray;
+@property (nonatomic, strong) NSArray *m_DotsColorArray;
 
 
-@property (nonatomic, strong, readonly) NSDateComponents *dateComponents;
+@property (nonatomic, strong, readonly) NSDateComponents *m_DateComponents;
 
 
 /**

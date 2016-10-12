@@ -8,12 +8,8 @@
 
 #import "LeftViewController.h"
 #import "CalendarViewController.h"
-#import <Masonry/Masonry.h>
 
 @interface LeftViewController ()
-
-@property (nonatomic, weak) UIScrollView *scrollView;
-@property (nonatomic, strong) NSArray *monthViewArray;
 
 @end
 

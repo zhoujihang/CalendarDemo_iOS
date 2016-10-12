@@ -12,7 +12,7 @@
 
 @interface CalendarDayViewModel ()
 
-@property (nonatomic, strong, readwrite) NSDateComponents *dateComponents;
+@property (nonatomic, strong, readwrite) NSDateComponents *m_DateComponents;
 
 @end
 
@@ -28,18 +28,18 @@
     // 是否被选中
     if ([dateComponents ext_compareToDateComponentsYMD:selectedDateComponents] == NSOrderedSame && isCurrentMonth) {
         // 被选中
-        model.backCircleColor = [UIColor redColor];
-        model.lunarColor = [UIColor blackColor];
-        model.numberColor = [UIColor whiteColor];
+        model.m_BackCircleColor = [UIColor redColor];
+        model.m_LunarColor = [UIColor blackColor];
+        model.m_NumberColor = [UIColor whiteColor];
     }else{
-        model.backCircleColor = nil;
+        model.m_BackCircleColor = nil;
         // 是否当月
         if (isCurrentMonth) {
-            model.numberColor = [UIColor blackColor];
-            model.lunarColor = [UIColor blackColor];
+            model.m_NumberColor = [UIColor blackColor];
+            model.m_LunarColor = [UIColor blackColor];
         }else{
-            model.numberColor = [UIColor lightGrayColor];
-            model.lunarColor = [UIColor lightGrayColor];
+            model.m_NumberColor = [UIColor lightGrayColor];
+            model.m_LunarColor = [UIColor lightGrayColor];
         }
     }
     
@@ -48,36 +48,36 @@
 
 + (instancetype)modelFromDateComponents:(NSDateComponents *)dateComponents withSelectedDateComponents:(NSDateComponents *)selectedDateComponents{
     CalendarDayViewModel *model = [[CalendarDayViewModel alloc] init];
-    model.dateComponents = dateComponents;
+    model.m_DateComponents = dateComponents;
     
     // 是否今日
     NSDateComponents *todayCpt = [[NSDate date] ext_dateCompontentsYMDHMSWW];
     if ([dateComponents ext_compareToDateComponentsYMD:todayCpt] == NSOrderedSame) {
         // 今天
-        model.numberString = @"今";
+        model.m_NumberString = @"今";
     }else{
-        model.numberString = [NSString stringWithFormat:@"%ld", dateComponents.day];
+        model.m_NumberString = [NSString stringWithFormat:@"%ld", dateComponents.day];
     }
     
-    model.numberColor = [UIColor blackColor];
-    model.lunarColor = [UIColor blackColor];
+    model.m_NumberColor = [UIColor blackColor];
+    model.m_LunarColor = [UIColor blackColor];
     
     // 是否被选中
     if ([dateComponents ext_compareToDateComponentsYMD:selectedDateComponents] == NSOrderedSame) {
         // 被选中
-        model.backCircleColor = [UIColor redColor];
-        model.numberColor = [UIColor whiteColor];
+        model.m_BackCircleColor = [UIColor redColor];
+        model.m_NumberColor = [UIColor whiteColor];
     }
     
     // 获得农历日期
     NSString *chineseDay = [[dateComponents ext_localDate] ext_chineseDay];
-    model.lunarString = chineseDay;
+    model.m_LunarString = chineseDay;
     
     // 设置底部点点视图，后6天每天都有点点
     NSDictionary *dotsColorArrayDic = [self dotsColorArrayDic];
     [dotsColorArrayDic enumerateKeysAndObjectsUsingBlock:^(NSDateComponents *key, NSArray<UIColor *> *obj, BOOL *stop) {
         if ([dateComponents ext_compareToDateComponentsYMD:key] == NSOrderedSame) {
-            model.dotsColorArray = obj;
+            model.m_DotsColorArray = obj;
             *stop = YES;
         }
     }];

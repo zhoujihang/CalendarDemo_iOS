@@ -61,7 +61,7 @@
 }
 - (void)calendarDayViewDidClick:(CalendarDayView *)view{
     if ([self.m_Delegate respondsToSelector:@selector(calendarWeekView:didClickWithDateComponent:)]) {
-        [self.m_Delegate calendarWeekView:self didClickWithDateComponent:[view.m_Model.dateComponents copy]];
+        [self.m_Delegate calendarWeekView:self didClickWithDateComponent:[view.m_Model.m_DateComponents copy]];
     }
 }
 @end
