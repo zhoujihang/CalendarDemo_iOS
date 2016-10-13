@@ -208,17 +208,17 @@ typedef NS_ENUM(NSUInteger, MonthScrollDirectionType) {
     // 日期模型转化为视图模型
     NSMutableArray *leftMonthViewModelMArr = [NSMutableArray arrayWithCapacity:leftMonthDateComponentsArray.count];
     for (int i=0; i<leftMonthDateComponentsArray.count; i++) {
-        CalendarDayViewModel *vm = [CalendarDayViewModel  modelFromDateComponents:leftMonthDateComponentsArray[i] comparedToCurrentMonthDateComponents:leftMonthFirstDayDateCpt withSelectedDateComponents:self.m_SelectedDateComponent];
+        CalendarDayViewModel *vm = [CalendarDayViewModel modelFromDateComponents:leftMonthDateComponentsArray[i] withSelectedDateComponents:self.m_SelectedDateComponent currentMonthDateComponents:leftMonthFirstDayDateCpt];
         [leftMonthViewModelMArr addObject:vm];
     }
     NSMutableArray *currentMonthViewModelMArr = [NSMutableArray arrayWithCapacity:currentMonthDateComponentsArray.count];
     for (int i=0; i<currentMonthDateComponentsArray.count; i++) {
-        CalendarDayViewModel *vm = [CalendarDayViewModel  modelFromDateComponents:currentMonthDateComponentsArray[i] comparedToCurrentMonthDateComponents:dateComponentsYMD withSelectedDateComponents:self.m_SelectedDateComponent];
+        CalendarDayViewModel *vm = [CalendarDayViewModel modelFromDateComponents:currentMonthDateComponentsArray[i] withSelectedDateComponents:self.m_SelectedDateComponent currentMonthDateComponents:dateComponentsYMD];
         [currentMonthViewModelMArr addObject:vm];
     }
     NSMutableArray *rightMonthViewModelMArr = [NSMutableArray arrayWithCapacity:rightMonthDateComponentsArray.count];
     for (int i=0; i<rightMonthDateComponentsArray.count; i++) {
-        CalendarDayViewModel *vm = [CalendarDayViewModel  modelFromDateComponents:rightMonthDateComponentsArray[i] comparedToCurrentMonthDateComponents:rightMonthFirstDayDateCpt withSelectedDateComponents:self.m_SelectedDateComponent];
+        CalendarDayViewModel *vm = [CalendarDayViewModel modelFromDateComponents:rightMonthDateComponentsArray[i] withSelectedDateComponents:self.m_SelectedDateComponent currentMonthDateComponents:rightMonthFirstDayDateCpt];
         [rightMonthViewModelMArr addObject:vm];
     }
     

@@ -17,10 +17,14 @@
 // 当前日期所在月份的最后一天
 - (NSDate *)ext_limitDateInCurrentMonth;
 
-#pragma mark - 农历字符串
-- (NSString *)ext_chineseYear;
-- (NSString *)ext_chineseMonth;
-- (NSString *)ext_chineseDay;
+#pragma mark - 农历日期
+- (NSDateComponents *)ext_chineseDateComponents;
+- (NSInteger)ext_chineseYear;
+- (NSInteger)ext_chineseMonth;
+- (NSInteger)ext_chineseDay;
+- (NSString *)ext_chineseYearString;
+- (NSString *)ext_chineseMonthString;
+- (NSString *)ext_chineseDayString;
 
 
 @end

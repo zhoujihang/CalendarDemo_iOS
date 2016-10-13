@@ -21,9 +21,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    RightViewController *rightVC = [[RightViewController alloc] init];
-    rightVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:rightVC animated:YES];
+    
 }
 
 @end

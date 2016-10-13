@@ -34,14 +34,12 @@
  日期模型转月视图模型
 
  @param dateComponents             需要转换的日期模型
- @param currentMonthDateComponents 当前日历显示的月份，year、month为有效值
  @param selectedDateComponents     转为模型时需要显示为"选中"状态的日期
+ @param currentMonthDateComponents 当前日历显示的月份，year、month为有效值
 
  @return CalendarDayView的模型视图
  */
-+ (instancetype)modelFromDateComponents:(NSDateComponents *)dateComponents comparedToCurrentMonthDateComponents:(NSDateComponents *)currentMonthDateComponents withSelectedDateComponents:(NSDateComponents *)selectedDateComponents;
-
-
++ (instancetype)modelFromDateComponents:(NSDateComponents *)dateComponents withSelectedDateComponents:(NSDateComponents *)selectedDateComponents currentMonthDateComponents:(NSDateComponents *)currentMonthDateComponents;
 
 /**
  日期模型转周视图模型
