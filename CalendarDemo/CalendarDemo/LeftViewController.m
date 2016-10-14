@@ -7,7 +7,7 @@
 //
 
 #import "LeftViewController.h"
-#import "CalendarViewController.h"
+#import "BBCalendarViewController.h"
 
 @interface LeftViewController ()
 
@@ -21,7 +21,7 @@
     
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    CalendarViewController *calendarVC = [[CalendarViewController alloc] init];
+    BBCalendarViewController *calendarVC = [[BBCalendarViewController alloc] init];
     [self.navigationController pushViewController:calendarVC animated:YES];
 }
 

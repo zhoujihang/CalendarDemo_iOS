@@ -12,7 +12,6 @@
 #ifdef __OBJC__
 
 #import "CommonMacro.h"
-#import "UIColor+Extension.h"
 
 
 #endif /* __OBJC__ */
