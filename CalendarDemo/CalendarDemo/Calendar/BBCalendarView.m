@@ -10,6 +10,7 @@
 #import "BBCalendarWeekNameView.h"
 #import "BBCalendarContentMonthView.h"
 #import "BBCalendarContentWeekView.h"
+#import "BBCalendarTool.h"
 #import <Masonry/Masonry.h>
 #import "NSDate+CalendarRemindExtension.h"
 #import "NSDateComponents+CalendarRemindExtension.h"
@@ -134,13 +135,27 @@
 - (void)jumpToToday{
     [self.s_CalendarContentMonthView jumpToToday];
 }
+- (void)jumpToYear:(NSInteger)year month:(NSInteger)month{
+    NSDateComponents *dateCpt = [self.s_CalendarContentMonthView.m_SelectedDateComponent copy];
+    if (dateCpt.year == year && dateCpt.month == month) {
+        // 依然选中当月
+        return;
+    }
+    
+    dateCpt.year = year;
+    dateCpt.month = month;
+    dateCpt.day = 1;
+    [dateCpt cre_updateWeekDayAndWeekOfMonthAfterChangeDayValue];
+    
+    [self resetCalendarWithDateComponentsYMD:dateCpt];
+}
+
 - (void)scrollToLeftMonth{
     [self.s_CalendarContentMonthView scrollToLeftMonth];
 }
 - (void)scrollToRightMonth{
     [self.s_CalendarContentMonthView scrollToRightMonth];
 }
-
 
 #pragma mark - CalendarContentMonthView 代理
 - (void)calendarContentMonthView:(BBCalendarContentMonthView *)contentView didClickWithDateComponents:(NSDateComponents *)dateComponents{
@@ -152,7 +167,10 @@
 }
 
 #pragma mark -
+// 点击视图上具体日期后逻辑处理方法
 - (void)calendarDidClickDateComponents:(NSDateComponents *)dateComponents{
+    if (![BBCalendarTool isValidatedDateComponents:dateComponents]) {return;}
+    
     self.m_CurrentDateComponents = [dateComponents copy];
     
     // 修改month视图
@@ -180,6 +198,24 @@
     
     if ([self.m_Delegate respondsToSelector:@selector(calendarView:didClickWithDateComponents:)]) {
         [self.m_Delegate calendarView:self didClickWithDateComponents:[self.m_CurrentDateComponents copy]];
+    }
+}
+// 直接设置日历到指定日期
+- (void)resetCalendarWithDateComponentsYMD:(NSDateComponents *)dateComponents{
+    if (![BBCalendarTool isValidatedDateComponents:dateComponents]) {return;}
+    
+    self.m_CurrentDateComponents = [dateComponents copy];
+    
+    // 修改month视图
+    NSDateComponents *monthViewCurrentMonthDateCpt = self.s_CalendarContentMonthView.m_SelectedDateComponent;
+    if (!monthViewCurrentMonthDateCpt || [monthViewCurrentMonthDateCpt cre_compareToDateComponentsYMD:dateComponents] != NSOrderedSame) {
+        [self.s_CalendarContentMonthView refreshWithSelectedDateComponents:dateComponents];
+    }
+    // 修改week视图
+    NSDateComponents *weekViewCurrentMonthDateCpt = self.s_CalendarContentWeekView.m_SelectedDateComponent;
+    if (!weekViewCurrentMonthDateCpt || [weekViewCurrentMonthDateCpt cre_compareToDateComponentsYMD:dateComponents] != NSOrderedSame) {
+        // 选中了不同日期,需要更新周视图
+        [self.s_CalendarContentWeekView refreshWithSelectedDateComponents:dateComponents];
     }
 }
 

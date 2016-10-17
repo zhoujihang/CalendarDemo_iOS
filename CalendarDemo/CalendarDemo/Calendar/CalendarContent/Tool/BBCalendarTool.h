@@ -13,5 +13,7 @@
 // 传入日期，返回中国7个法定节假日名称，未找到则为nil
 + (NSString *)chineseHolidayNameOfGregorianDateComponents:(NSDateComponents *)dateComponents;
 
+// dateComponents是否在 [197001, 207012]范围内
++ (BOOL)isValidatedDateComponents:(NSDateComponents *)dateComponents;
 
 @end

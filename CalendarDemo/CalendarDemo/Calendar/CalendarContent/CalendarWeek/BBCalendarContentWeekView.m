@@ -12,10 +12,10 @@
 #import <Masonry/Masonry.h>
 #import "NSDate+CalendarRemindExtension.h"
 #import "NSDateComponents+CalendarRemindExtension.h"
-
-typedef NS_ENUM(NSUInteger, CalendarScrollDirectionType) {
-    CalendarScrollDirectionTypeLeft,
-    CalendarScrollDirectionTypeRight,
+#import "BBCalendarTool.h"
+typedef NS_ENUM(NSUInteger, WeekScrollDirectionType) {
+    WeekScrollDirectionTypeLeft,
+    WeekScrollDirectionTypeRight,
 };
 
 @interface BBCalendarContentWeekView ()<UIScrollViewDelegate, BBCalendarWeekViewDelegate>
@@ -109,6 +109,7 @@ typedef NS_ENUM(NSUInteger, CalendarScrollDirectionType) {
     [self.s_BackdropScrollView setContentOffset:leftOffset animated:YES];
 }
 - (void)scrollToLeftMonthWithSelectedDateComponents:(NSDateComponents *)dateComponents{
+    if (![BBCalendarTool isValidatedDateComponents:dateComponents]) {return;}
     self.m_SelectedDateComponent = [dateComponents copy];
     [self scrollToLeftMonth];
 }
@@ -117,10 +118,12 @@ typedef NS_ENUM(NSUInteger, CalendarScrollDirectionType) {
     [self.s_BackdropScrollView setContentOffset:rightOffset animated:YES];
 }
 - (void)scrollToRightMonthWithSelectedDateComponents:(NSDateComponents *)dateComponents{
+    if (![BBCalendarTool isValidatedDateComponents:dateComponents]) {return;}
     self.m_SelectedDateComponent = [dateComponents copy];
     [self scrollToRightMonth];
 }
 - (void)refreshWithSelectedDateComponents:(NSDateComponents *)dateComponents{
+    if (![BBCalendarTool isValidatedDateComponents:dateComponents]) {return;}
     self.m_SelectedDateComponent = dateComponents;
     [self resetCalendarContentDate];
 }
@@ -129,18 +132,49 @@ typedef NS_ENUM(NSUInteger, CalendarScrollDirectionType) {
     CGFloat offsetX = scrollView.contentOffset.x;
     if (offsetX == 0) {
         // 滑到左边
-        [self jumpToWeekWithDirection:CalendarScrollDirectionTypeLeft];
+        if ([self validateJumpToWeekWithDirection:WeekScrollDirectionTypeLeft]) {
+            [self jumpToWeekWithDirection:WeekScrollDirectionTypeLeft];
+        }
     }else if(offsetX == self.s_BackdropScrollView.frame.size.width*2){
         // 滑到右边
-        [self jumpToWeekWithDirection:CalendarScrollDirectionTypeRight];
+        if ([self validateJumpToWeekWithDirection:WeekScrollDirectionTypeRight]) {
+            [self jumpToWeekWithDirection:WeekScrollDirectionTypeRight];
+        }
     }
 }
-- (void)jumpToWeekWithDirection:(CalendarScrollDirectionType)type{
-    NSInteger weekSeconds = 7*24*60*60;
-    NSInteger addingSeconds = type==CalendarScrollDirectionTypeRight ? weekSeconds : -weekSeconds;
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
+    CGFloat targetOffsetX = (*targetContentOffset).x;
+    BOOL canScroll = YES;
+    if (targetOffsetX == 0) {
+        canScroll = [self validateJumpToWeekWithDirection:WeekScrollDirectionTypeLeft];
+    }else if (targetOffsetX == scrollView.frame.size.width*2){
+        canScroll = [self validateJumpToWeekWithDirection:WeekScrollDirectionTypeRight];
+    }
+    if (!canScroll) {
+        *targetContentOffset = CGPointMake(scrollView.frame.size.width, 0);
+    }
+}
+- (NSDateComponents *)targetDateComponentsWithDirection:(WeekScrollDirectionType)type{
+    NSInteger daySecondes = 24*60*60;
+    NSInteger weekDay = self.m_SelectedDateComponent.weekday;
+    NSInteger addingSeconds = type==WeekScrollDirectionTypeRight ? (7-weekDay+1)*daySecondes : -(weekDay-1+7)*daySecondes;
     NSDate *date = [self.m_SelectedDateComponent cre_localDate];
     NSDate *nextDate = [date dateByAddingTimeInterval:addingSeconds];
-    self.m_SelectedDateComponent = [nextDate cre_dateCompontentsYMDHMSWW];
+    NSDateComponents *targetDateCpt = [nextDate cre_dateCompontentsYMDHMSWW];
+    return targetDateCpt;
+}
+- (BOOL)validateJumpToWeekWithDirection:(WeekScrollDirectionType)type{
+    NSDateComponents *targetDateCpt = [self targetDateComponentsWithDirection:type];
+    
+    if (![BBCalendarTool isValidatedDateComponents:targetDateCpt]) {
+        return NO;
+    }
+    
+    return YES;
+}
+// 切换到下个星期，同时选中星期天
+- (void)jumpToWeekWithDirection:(WeekScrollDirectionType)type{
+    self.m_SelectedDateComponent = [self targetDateComponentsWithDirection:type];
     
     [self resetCalendarContentDate];
 }

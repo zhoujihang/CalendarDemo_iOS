@@ -26,6 +26,7 @@
 @property (nonatomic, strong, readonly) NSDateComponents *m_CurrentDateComponents;
 
 - (void)jumpToToday;
+- (void)jumpToYear:(NSInteger)year month:(NSInteger)month;
 - (void)scrollToLeftMonth;
 - (void)scrollToRightMonth;
 @end

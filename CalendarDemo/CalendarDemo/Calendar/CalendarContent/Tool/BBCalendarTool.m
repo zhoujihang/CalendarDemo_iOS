@@ -11,13 +11,13 @@
 #import "NSDateComponents+CalendarRemindExtension.h"
 #import "NSDate+CalendarRemindExtension.h"
 
-NSString *const kChineseHolidayYuanDan = @"元旦";
-NSString *const kChineseHolidayChunJie = @"春节";
-NSString *const kChineseHolidayQingMing = @"清明节";
-NSString *const kChineseHolidayLaoDong = @"劳动节";
-NSString *const kChineseHolidayDuanWu = @"端午节";
-NSString *const kChineseHolidayZhongQiu = @"中秋节";
-NSString *const kChineseHolidayGuoQing = @"国庆节";
+static NSString *const kChineseHolidayYuanDan = @"元旦";
+static NSString *const kChineseHolidayChunJie = @"春节";
+static NSString *const kChineseHolidayQingMing = @"清明节";
+static NSString *const kChineseHolidayLaoDong = @"劳动节";
+static NSString *const kChineseHolidayDuanWu = @"端午节";
+static NSString *const kChineseHolidayZhongQiu = @"中秋节";
+static NSString *const kChineseHolidayGuoQing = @"国庆节";
 
 @implementation BBCalendarTool
 
@@ -70,6 +70,14 @@ NSString *const kChineseHolidayGuoQing = @"国庆节";
         solarTermString = [NSString stringWithCString:solarChar encoding:NSUTF8StringEncoding];
     }
     return solarTermString;
+}
+
++ (BOOL)isValidatedDateComponents:(NSDateComponents *)dateComponents{
+    NSInteger year = dateComponents.year;
+    if (year<1970) {return NO;}
+    if (year>2070) {return NO;}
+    
+    return YES;
 }
 
 @end

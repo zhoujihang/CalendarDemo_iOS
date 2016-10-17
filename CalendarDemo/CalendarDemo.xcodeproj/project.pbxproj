@@ -31,6 +31,8 @@
 		479A9FD11D9E5D6F001006EA /* UIImage+CalendarRemindExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 479A9FD01D9E5D6F001006EA /* UIImage+CalendarRemindExtension.m */; };
 		47B4F37E1DAF6EAA001A9AA3 /* solarterm.c in Sources */ = {isa = PBXBuildFile; fileRef = 47B4F37C1DAF6EAA001A9AA3 /* solarterm.c */; };
 		47B4F3811DAF7123001A9AA3 /* BBCalendarTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B4F3801DAF7123001A9AA3 /* BBCalendarTool.m */; };
+		47B4F41C1DB0E6C7001A9AA3 /* BBCalendarPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B4F41B1DB0E6C7001A9AA3 /* BBCalendarPickerView.m */; };
+		47B4F41F1DB0EB59001A9AA3 /* BBCalendarPickerDecorateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B4F41E1DB0EB59001A9AA3 /* BBCalendarPickerDecorateView.m */; };
 		AB842CA61BA944AC37AE410E /* libPods-CalendarDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54EADC6C9827FE42EFBB0DE8 /* libPods-CalendarDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +94,10 @@
 		47B4F37D1DAF6EAA001A9AA3 /* solarterm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = solarterm.h; sourceTree = "<group>"; };
 		47B4F37F1DAF7123001A9AA3 /* BBCalendarTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBCalendarTool.h; sourceTree = "<group>"; };
 		47B4F3801DAF7123001A9AA3 /* BBCalendarTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBCalendarTool.m; sourceTree = "<group>"; };
+		47B4F41A1DB0E6C7001A9AA3 /* BBCalendarPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBCalendarPickerView.h; sourceTree = "<group>"; };
+		47B4F41B1DB0E6C7001A9AA3 /* BBCalendarPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBCalendarPickerView.m; sourceTree = "<group>"; };
+		47B4F41D1DB0EB59001A9AA3 /* BBCalendarPickerDecorateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBCalendarPickerDecorateView.h; sourceTree = "<group>"; };
+		47B4F41E1DB0EB59001A9AA3 /* BBCalendarPickerDecorateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBCalendarPickerDecorateView.m; sourceTree = "<group>"; };
 		54EADC6C9827FE42EFBB0DE8 /* libPods-CalendarDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CalendarDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57441F9622D2220ECD4C0064 /* libPods-CalendarDemoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CalendarDemoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A27ECC2C4F3A7EBB9976DF48 /* Pods-CalendarDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarDemoTests/Pods-CalendarDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +137,7 @@
 				477DD9B41DAB41F2003D375E /* CalendarWeek */,
 				477DD9A81DAB41F2003D375E /* CalendarDay */,
 				477DD9B91DAB41F2003D375E /* CalendarWeekName */,
+				47B4F4191DB0E6AC001A9AA3 /* CalendarPickerView */,
 			);
 			path = CalendarContent;
 			sourceTree = "<group>";
@@ -295,6 +302,17 @@
 			path = Tool;
 			sourceTree = "<group>";
 		};
+		47B4F4191DB0E6AC001A9AA3 /* CalendarPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				47B4F41A1DB0E6C7001A9AA3 /* BBCalendarPickerView.h */,
+				47B4F41B1DB0E6C7001A9AA3 /* BBCalendarPickerView.m */,
+				47B4F41D1DB0EB59001A9AA3 /* BBCalendarPickerDecorateView.h */,
+				47B4F41E1DB0EB59001A9AA3 /* BBCalendarPickerDecorateView.m */,
+			);
+			path = CalendarPickerView;
+			sourceTree = "<group>";
+		};
 		4E70EB88B5ACB5F5CE3B087E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,10 +454,12 @@
 				477DD9C31DAB41F2003D375E /* BBCalendarWeekNameView.m in Sources */,
 				47905B901DA88F5900AC00F1 /* NSDate+CalendarRemindExtension.m in Sources */,
 				47B4F3811DAF7123001A9AA3 /* BBCalendarTool.m in Sources */,
+				47B4F41F1DB0EB59001A9AA3 /* BBCalendarPickerDecorateView.m in Sources */,
 				479A9F3D1D9D3724001006EA /* AppDelegate.m in Sources */,
 				479A9F3A1D9D3724001006EA /* main.m in Sources */,
 				477DD9BC1DAB41F2003D375E /* BBCalendarDayBottomDotsView.m in Sources */,
 				479A9FCE1D9E51CB001006EA /* RightViewController.m in Sources */,
+				47B4F41C1DB0E6C7001A9AA3 /* BBCalendarPickerView.m in Sources */,
 				477DD9BF1DAB41F2003D375E /* BBCalendarContentMonthView.m in Sources */,
 				477DD9CA1DAB81DE003D375E /* BBCalendarNavBarView.m in Sources */,
 				477DD9C71DAB81A0003D375E /* BBCalendarViewController.m in Sources */,

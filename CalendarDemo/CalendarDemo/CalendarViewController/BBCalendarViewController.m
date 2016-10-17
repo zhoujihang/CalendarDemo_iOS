@@ -10,13 +10,15 @@
 #import "BBCalendarView.h"
 #import <Masonry/Masonry.h>
 #import "BBCalendarNavBarView.h"
+#import "BBCalendarPickerView.h"
 
-@interface BBCalendarViewController () <UITableViewDelegate, UITableViewDataSource, BBCalendarViewDelegate, BBCalendarNavBarViewDelegate>
+@interface BBCalendarViewController () <UITableViewDelegate, UITableViewDataSource, BBCalendarViewDelegate, BBCalendarNavBarViewDelegate, BBCalendarPickerViewDelegate>
 
 @property (nonatomic, weak) BBCalendarNavBarView *s_NavBarView;
 @property (nonatomic, weak) UIScrollView *s_BackdropScrollView;
 @property (nonatomic, weak) BBCalendarView *s_CalendarView;
 @property (nonatomic, weak) UITableView *s_remindTableView;
+@property (nonatomic, weak) BBCalendarPickerView *s_PickerView;
 // 当 tableview 内容高度不足够高导致周视图无法完全覆盖月视图时，用此视图填充高度
 @property (nonatomic, weak) UIView *s_BottomPaddingView;
 
@@ -267,7 +269,15 @@
     CLog(@"添加提醒");
 }
 - (void)calendarNavBarViewDidClickTitle:(BBCalendarNavBarView *)titleView{
-    CLog(@"弹出滚筒");
+    BBCalendarPickerView *pickerView = [[BBCalendarPickerView alloc] init];
+    pickerView.m_Delegate = self;
+    [self.view addSubview:pickerView];
+    self.s_PickerView = pickerView;
+    
+    [self.s_PickerView jumpToSelectedYear:self.s_CalendarView.m_CurrentDateComponents.year month:self.s_CalendarView.m_CurrentDateComponents.month];
+    [self.s_PickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
 }
 - (void)calendarNavBarViewDidClickTitleLeftBtn:(BBCalendarNavBarView *)titleView{
     [self.s_CalendarView scrollToLeftMonth];
@@ -283,6 +293,9 @@
     NSString *title = [NSString stringWithFormat:@"%@年%@月", currentYear, currentMonth];
     self.s_NavBarView.m_TitleString = title;
 }
-
+#pragma mark - pickerview 代理方法
+- (void)calendarPickerView:(BBCalendarPickerView *)pickerView didSelectYear:(NSInteger)year month:(NSInteger)month{
+    [self.s_CalendarView jumpToYear:year month:month];
+}
 
 @end

@@ -12,7 +12,7 @@
 #import <Masonry/Masonry.h>
 #import "NSDate+CalendarRemindExtension.h"
 #import "NSDateComponents+CalendarRemindExtension.h"
-
+#import "BBCalendarTool.h"
 typedef NS_ENUM(NSUInteger, MonthScrollDirectionType) {
     MonthScrollDirectionTypeLeft,
     MonthScrollDirectionTypeRight,
@@ -120,6 +120,8 @@ typedef NS_ENUM(NSUInteger, MonthScrollDirectionType) {
     [self.s_BackdropScrollView setContentOffset:leftOffset animated:YES];
 }
 - (void)scrollToLeftMonthWithSelectedDateComponents:(NSDateComponents *)dateComponents{
+    if (![BBCalendarTool isValidatedDateComponents:dateComponents]) {return;}
+    
     self.m_SelectedDateComponent = [dateComponents copy];
     [self scrollToLeftMonth];
 }
@@ -128,41 +130,73 @@ typedef NS_ENUM(NSUInteger, MonthScrollDirectionType) {
     [self.s_BackdropScrollView setContentOffset:rightOffset animated:YES];
 }
 - (void)scrollToRightMonthWithSelectedDateComponents:(NSDateComponents *)dateComponents{
+    if (![BBCalendarTool isValidatedDateComponents:dateComponents]) {return;}
+    
     self.m_SelectedDateComponent = [dateComponents copy];
     [self scrollToRightMonth];
 }
 - (void)refreshWithSelectedDateComponents:(NSDateComponents *)dateComponents{
+    if (![BBCalendarTool isValidatedDateComponents:dateComponents]) {return;}
     self.m_SelectedDateComponent = dateComponents;
-    self.s_PresentMonth = dateComponents.month;
     [self resetCalendarContentDate];
 }
 #pragma mark - 滑动切换
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetX = scrollView.contentOffset.x;
     if (offsetX == 0) {
-        [self jumpToMonthWithDirection:MonthScrollDirectionTypeLeft];
+        if ([self validateJumpToMonthWithDirection:MonthScrollDirectionTypeLeft]) {
+            [self jumpToMonthWithDirection:MonthScrollDirectionTypeLeft];
+        }
     }else if (offsetX == scrollView.frame.size.width*2){
-        [self jumpToMonthWithDirection:MonthScrollDirectionTypeRight];
+        if ([self validateJumpToMonthWithDirection:MonthScrollDirectionTypeRight]) {
+            [self jumpToMonthWithDirection:MonthScrollDirectionTypeRight];
+        }
     }
 }
-- (void)jumpToMonthWithDirection:(MonthScrollDirectionType)type{
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
+    CGFloat targetOffsetX = (*targetContentOffset).x;
+    BOOL canScroll = YES;
+    if (targetOffsetX == 0) {
+        canScroll = [self validateJumpToMonthWithDirection:MonthScrollDirectionTypeLeft];
+    }else if (targetOffsetX == scrollView.frame.size.width*2){
+        canScroll = [self validateJumpToMonthWithDirection:MonthScrollDirectionTypeRight];
+    }
+    if (!canScroll) {
+        *targetContentOffset = CGPointMake(scrollView.frame.size.width, 0);
+    }
+}
+// 得到左右滑动的后的目的日期
+- (NSDateComponents *)targetDateComponentsWithDirection:(MonthScrollDirectionType)type{
+    NSDateComponents *targetDateCpt = [self.m_SelectedDateComponent copy];
     NSInteger selectedMonth = self.m_SelectedDateComponent.month;
     if (type == MonthScrollDirectionTypeLeft) {
-        self.s_PresentMonth = (self.s_PresentMonth-1)<=0 ? 12 : self.s_PresentMonth-1;
-        if (self.s_PresentMonth != selectedMonth) {
-            // 已选中日期，和将要显示月份不一致时，选中将要显示月份的第一天
-            self.m_SelectedDateComponent = [self.m_SelectedDateComponent cre_leftMonthFirstDayDateComponents];
+        NSInteger willPresentMonth = (self.s_PresentMonth-1)<=0 ? 12 : self.s_PresentMonth-1;
+        if (willPresentMonth != selectedMonth) {
+            targetDateCpt = [self.m_SelectedDateComponent cre_leftMonthFirstDayDateComponents];
         }
     }else{
-        self.s_PresentMonth = (self.s_PresentMonth+1)>=13 ? 1 : self.s_PresentMonth+1;
-        if (self.s_PresentMonth != selectedMonth) {
-            self.m_SelectedDateComponent = [self.m_SelectedDateComponent cre_rightMonthFirstDayDateComponents];
+        NSInteger willPresentMonth = (self.s_PresentMonth+1)>=13 ? 1 : self.s_PresentMonth+1;
+        if (willPresentMonth != selectedMonth) {
+            targetDateCpt = [self.m_SelectedDateComponent cre_rightMonthFirstDayDateComponents];
         }
     }
-    
+    return targetDateCpt;
+}
+// 校验能否左滑或者右滑
+- (BOOL)validateJumpToMonthWithDirection:(MonthScrollDirectionType)type{
+    NSDateComponents *targetDateComponents = [self targetDateComponentsWithDirection:type];
+    if (![BBCalendarTool isValidatedDateComponents:targetDateComponents]) {
+        return NO;
+    }
+    return YES;
+}
+// 执行左右滑动切换数据的动作
+- (void)jumpToMonthWithDirection:(MonthScrollDirectionType)type{
+    self.m_SelectedDateComponent = [self targetDateComponentsWithDirection:type];
     [self resetCalendarContentDate];
 }
 - (void)resetCalendarContentDate{
+    self.s_PresentMonth = self.m_SelectedDateComponent.month;
     NSArray *monthArray = [self calendarMonthArrayForDateComponentsYMD:self.m_SelectedDateComponent];
     if (self.s_MonthViewArray.count != 3) {return;}
     if (monthArray.count != 3) {return;}

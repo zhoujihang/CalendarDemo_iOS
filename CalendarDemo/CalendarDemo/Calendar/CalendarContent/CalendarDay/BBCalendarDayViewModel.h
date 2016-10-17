@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-
 @interface BBCalendarDayViewModel : NSObject
 
 /// 圈圈颜色
