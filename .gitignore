@@ -5,6 +5,7 @@
 ## Build generated
 build/
 DerivedData/
+CalendarDemo/b_output/
 
 ## Various settings
 *.pbxuser
