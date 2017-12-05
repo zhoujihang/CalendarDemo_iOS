@@ -36,7 +36,7 @@ root_path="`pwd`/${root_path}"
 fi
 src_path="${root_path}/CalendarDemo"
 output_path="${root_path}/oclint_output"
-
+script_path="${}/build_script"
 xcodebuild="/usr/bin/xcodebuild" 
 
 # 重建output_path目录
@@ -64,8 +64,7 @@ echo "compile_commands.json 存在 ${compile_commands_json}"
 
 
 
-# 将compile_commands.json转化为oclint.xml
-# cd "${output_path}"
+# 将compile_commands.json转化为oclint.xml -p 引入 compile_commands.json 文件
 oclint_xml="${output_path}/oclint.xml"
 oclint-json-compilation-database -e Pods -p "${output_path}" -v -- -report-type pmd -o "${oclint_xml}"
 
