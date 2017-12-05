@@ -1,16 +1,59 @@
+# 规则列表
+# http://docs.oclint.org/en/stable/rules/index.html
 
-rules:
-  - UnusedLocalVariable
+#rules:
+#  - UnusedLocalVariable
+
+disable-rules:
+# Naming
+  - LongVariableName
+  - ShortVariableName
+#Size
+  - LongLine
+# Unused
   - UnusedMethodParameter
 
+# 可用阈值
+# http://docs.oclint.org/en/stable/howto/thresholds.html
+
 rule-configurations:
+  - key: CYCLOMATIC_COMPLEXITY
+    value: 10
   - key: LONG_CLASS
-    value: 800
-  - key: LONG_METHOD
-    value: 50
+    value: 1000
   - key: LONG_LINE
     value: 100
+  - key: LONG_METHOD
+    value: 50
+  - key: LONG_VARIABLE_NAME
+    value: 20
+  - key: MAXIMUM_IF_LENGTH
+    value: 15
+  - key: MINIMUM_CASES_IN_SWITCH
+    value: 2
+  - key: NPATH_COMPLEXITY
+    value: 200
+  - key: NCSS_METHOD
+    value: 30
+  - key: NESTED_BLOCK_DEPTH
+    value: 5
+  - key: SHORT_VARIABLE_NAME
+    value: 2
+  - key: TOO_MANY_FIELDS
+    value: 20
+  - key: TOO_MANY_METHODS
+    value: 30
+  - key: TOO_MANY_PARAMETERS
+    value: 10
 
 max-priority-1: 999999
 max-priority-2: 999999
 max-priority-3: 999999
+
+# 输出方式和定位交给sh脚本决定
+# output: oclint.xml
+# report-type: xml
+
+enable-global-analysis: true
+enable-clang-static-analyzer: true
+
