@@ -35,11 +35,11 @@ if [[ "$root_path_prefix" != "/" ]]; then
 root_path="`pwd`/${root_path}"
 fi
 src_path="${root_path}/CalendarDemo"
-output_path="${src_path}/b_output"
+output_path="${root_path}/oclint_output"
 
 xcodebuild="/usr/bin/xcodebuild" 
 
-# 重建b_output目录
+# 重建output_path目录
 if [[ ! -z "$output_path" ]]  && [[ ! -z "$root_path" ]]; then
 rm -rf ${output_path}
 fi
@@ -48,11 +48,32 @@ mkdir -pv ${output_path}
 # 进入项目根目录
 cd "${src_path}"
 
+# 运行pod
+pod install --verbose --no-repo-update
+
 # 使用xcpretty生成compile_commands.json文件
-"${xcodebuild}" -workspace CalendarDemo.xcworkspace -scheme CalendarDemo -configuration Release clean build |tee "${output_path}"/xcodebuild.log |xcpretty --report json-compilation-database --output "${output_path}"/compile_commands.json
+compile_commands_json="${output_path}/compile_commands.json"
+"${xcodebuild}" -workspace CalendarDemo.xcworkspace -scheme CalendarDemo -configuration Debug -sdk iphonesimulator COMPILER_INDEX_STORE_ENABLE=NO clean build |tee "${output_path}"/xcodebuild.log |xcpretty --report json-compilation-database --output "${compile_commands_json}"
+
+# 检查 compile_commands.json 是否生成
+if [ ! -f "$compile_commands_json" ]; then
+    echo 'error：compile_commands.json 文件未成功生成'
+    exit -1
+fi
+echo "compile_commands.json 存在 ${compile_commands_json}"
+
+
 
 # 将compile_commands.json转化为oclint.xml
-cd "${output_path}"
-oclint-json-compilation-database -e Pods -v -- -max-priority-2=99999999 -max-priority-3=99999999 -report-type pmd -o oclint.xml
+# cd "${output_path}"
+oclint_xml="${output_path}/oclint.xml"
+oclint-json-compilation-database -e Pods -p "${output_path}" -v -- -report-type pmd -o "${oclint_xml}"
 
+# 检查 oclint.xml 是否生成
+if [ ! -f "$oclint_xml" ]; then
+    echo 'error：oclint.xml 文件未成功生成'
+    exit -1
+fi
+
+echo "oclint.xml 存在 ${oclint_xml}"
 echo 'finish oclint.sh ...'
