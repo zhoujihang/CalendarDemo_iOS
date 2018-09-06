@@ -1,10 +1,15 @@
-# Uncomment this line to define a global platform for your project
+# Uncomment the next line to define a global platform for your project
 platform :ios, '8.0'
 use_frameworks!
 
 target 'CalendarDemo' do
 
-pod 'Masonry', '~> 1.0.1'
-pod 'YYModel', '~> 1.0.4'
+  pod 'Masonry', '~> 1.0.1'
+  pod 'YYModel', '~> 1.0.4'
+  
+  target 'CalendarDemoTests' do
+    inherit! :search_paths
+
+  end
 
 end

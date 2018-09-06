@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "BBCalendarTool.h"
 
 @interface CalendarDemoTests : XCTestCase
 
@@ -16,24 +17,73 @@
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
 - (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
 }
 
 - (void)testPerformanceExample {
-    // This is an example of a performance test case.
+    
     [self measureBlock:^{
-        // Put the code you want to measure the time of here.
     }];
+}
+
+- (void)testCalendarTool_guoqingjie {
+    NSDateComponents *date = [self date2019_10_01];
+    NSString *dateName = [BBCalendarTool chineseHolidayNameOfGregorianDateComponents:date];
+    NSLog(@"zjh date:%@  dateName:%@", date, dateName);
+    NSAssert(dateName.length > 0, @"2019-10-01未成功识别为国家法定节假日");
+    NSAssert([dateName isEqualToString:@"国庆节"], @"2019-10-01未成功识别为国庆节");
+}
+
+- (void)testCalendarTool_noHoliday {
+    NSDateComponents *date = [self date2019_10_02];
+    NSString *dateName = [BBCalendarTool chineseHolidayNameOfGregorianDateComponents:date];
+    NSLog(@"zjh date:%@  dateName:%@", date, dateName);
+    NSAssert(dateName.length == 0, @"2019-10-02并非为国家法定节假日");
+    NSAssert(![dateName isEqualToString:@"国庆节"], @"2019-10-02并非为国庆节");
+}
+
+//- (void)testCalendarTool_inRange_error {
+//    NSDateComponents *date = [self date2019_10_01 ];
+//    BOOL isValidate = [BBCalendarTool isValidatedDateComponents:date];
+//    NSAssert(!isValidate, @"zjh date:%@ 应判定为在 1970-01-01, 2070-12-30 范围之内", date);
+//}
+- (void)testCalendarTool_inRange {
+    NSDateComponents *date = [self date2019_10_01 ];
+    BOOL isValidate = [BBCalendarTool isValidatedDateComponents:date];
+    NSAssert(isValidate, @"zjh date:%@ 应判定为在 1970-01-01, 2070-12-30 范围之内", date);
+}
+- (void)testCalendarTool_outOfRange {
+    NSDateComponents *date = [self date2100_10_01];
+    BOOL isValidate = [BBCalendarTool isValidatedDateComponents:date];
+    NSAssert(!isValidate, @"zjh date:%@ 应判定为在 1970-01-01, 2070-12-30 范围之外", date);
+}
+
+- (NSDateComponents *)date2019_10_01 {
+    NSDateComponents *date = [[NSDateComponents alloc] init];
+    date.year = 2019;
+    date.month = 10;
+    date.day = 01;
+    return date;
+}
+- (NSDateComponents *)date2019_10_02 {
+    NSDateComponents *date = [[NSDateComponents alloc] init];
+    date.year = 2019;
+    date.month = 10;
+    date.day = 02;
+    return date;
+}
+- (NSDateComponents *)date2100_10_01 {
+    NSDateComponents *date = [[NSDateComponents alloc] init];
+    date.year = 2100;
+    date.month = 10;
+    date.day = 01;
+    return date;
 }
 
 @end

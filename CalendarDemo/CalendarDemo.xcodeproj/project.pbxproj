@@ -35,6 +35,7 @@
 		47B4F41C1DB0E6C7001A9AA3 /* BBCalendarPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B4F41B1DB0E6C7001A9AA3 /* BBCalendarPickerView.m */; };
 		47B4F41F1DB0EB59001A9AA3 /* BBCalendarPickerDecorateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B4F41E1DB0EB59001A9AA3 /* BBCalendarPickerDecorateView.m */; };
 		705C0042B0C76C219339BD19 /* Pods_CalendarDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B96F82E85C887CA5A9C6E3 /* Pods_CalendarDemo.framework */; };
+		730635796F86C417B580F769 /* Pods_CalendarDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB205D99174160405DEC840 /* Pods_CalendarDemoTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +51,6 @@
 /* Begin PBXFileReference section */
 		00EDCC51996EA8CEA2368635 /* Pods-CalendarDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarDemoTests/Pods-CalendarDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		07CD7860AD5CA97CD94DAA90 /* Pods-CalendarDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarDemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarDemoUITests/Pods-CalendarDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		30026EA806B5D046ECBAF294 /* libPods-CalendarDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CalendarDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35837F0E664BBF0DE28CB157 /* Pods-CalendarDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarDemoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarDemoUITests/Pods-CalendarDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3BBA12A86CAC86BE3E029951 /* Pods-CalendarDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarDemo/Pods-CalendarDemo.release.xcconfig"; sourceTree = "<group>"; };
 		47607C0D213FA00D005CBC8E /* CalendarDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalendarDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +109,7 @@
 		47B4F41D1DB0EB59001A9AA3 /* BBCalendarPickerDecorateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBCalendarPickerDecorateView.h; sourceTree = "<group>"; };
 		47B4F41E1DB0EB59001A9AA3 /* BBCalendarPickerDecorateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBCalendarPickerDecorateView.m; sourceTree = "<group>"; };
 		57441F9622D2220ECD4C0064 /* libPods-CalendarDemoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CalendarDemoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CB205D99174160405DEC840 /* Pods_CalendarDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalendarDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A27ECC2C4F3A7EBB9976DF48 /* Pods-CalendarDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarDemoTests/Pods-CalendarDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D9A2BE322B3455C5CDD0DC4D /* Pods-CalendarDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarDemo/Pods-CalendarDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		F2B96F82E85C887CA5A9C6E3 /* Pods_CalendarDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalendarDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				730635796F86C417B580F769 /* Pods_CalendarDemoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,9 +326,9 @@
 		4E70EB88B5ACB5F5CE3B087E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				30026EA806B5D046ECBAF294 /* libPods-CalendarDemoTests.a */,
 				57441F9622D2220ECD4C0064 /* libPods-CalendarDemoUITests.a */,
 				F2B96F82E85C887CA5A9C6E3 /* Pods_CalendarDemo.framework */,
+				9CB205D99174160405DEC840 /* Pods_CalendarDemoTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -338,6 +340,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47607C14213FA00D005CBC8E /* Build configuration list for PBXNativeTarget "CalendarDemoTests" */;
 			buildPhases = (
+				B07CF0CD3CB8FF51AD34036E /* [CP] Check Pods Manifest.lock */,
 				47607C09213FA00D005CBC8E /* Sources */,
 				47607C0A213FA00D005CBC8E /* Frameworks */,
 				47607C0B213FA00D005CBC8E /* Resources */,
@@ -361,7 +364,6 @@
 				479A9F321D9D3724001006EA /* Frameworks */,
 				479A9F331D9D3724001006EA /* Resources */,
 				9239C1F7629AC2901748431C /* [CP] Embed Pods Frameworks */,
-				4FCA54ECF3BF69E3FD81858C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -434,21 +436,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4FCA54ECF3BF69E3FD81858C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CalendarDemo/Pods-CalendarDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8BD174FBA15D1337A8D19B36 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -485,6 +472,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CalendarDemo/Pods-CalendarDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B07CF0CD3CB8FF51AD34036E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CalendarDemoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -560,6 +565,7 @@
 /* Begin XCBuildConfiguration section */
 		47607C15213FA00D005CBC8E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A27ECC2C4F3A7EBB9976DF48 /* Pods-CalendarDemoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -590,6 +596,7 @@
 		};
 		47607C16213FA00D005CBC8E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 00EDCC51996EA8CEA2368635 /* Pods-CalendarDemoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;

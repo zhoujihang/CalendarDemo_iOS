@@ -1,15 +1,20 @@
 PODS:
-  - Masonry (1.0.1)
+  - Masonry (1.0.2)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
   - Masonry (~> 1.0.1)
   - YYModel (~> 1.0.4)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Masonry
+    - YYModel
+
 SPEC CHECKSUMS:
-  Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: ba3d6b68b67e0afb5ad4710b4d978b6645c87a45
+PODFILE CHECKSUM: c706033150311587f3f926af3b8769f94951127c
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.3
