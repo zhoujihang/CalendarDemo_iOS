@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		47F201E52147AE7600955C09 /* OCLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 47F201E82147AE7600955C09 /* Build configuration list for PBXAggregateTarget "OCLint" */;
+			buildPhases = (
+				47F201E92147AE8800955C09 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = OCLint;
+			productName = OCLint;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		47607C10213FA00D005CBC8E /* CalendarDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 47607C0F213FA00D005CBC8E /* CalendarDemoTests.m */; };
 		477DD9911DA92702003D375E /* NSDateComponents+CalendarRemindExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 477DD9901DA92702003D375E /* NSDateComponents+CalendarRemindExtension.m */; };
@@ -394,6 +408,11 @@
 						DevelopmentTeam = GULEG3228R;
 						ProvisioningStyle = Automatic;
 					};
+					47F201E52147AE7600955C09 = {
+						CreatedOnToolsVersion = 9.3;
+						DevelopmentTeam = GULEG3228R;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 479A9F301D9D3724001006EA /* Build configuration list for PBXProject "CalendarDemo" */;
@@ -411,6 +430,7 @@
 			targets = (
 				479A9F341D9D3724001006EA /* CalendarDemo */,
 				47607C0C213FA00D005CBC8E /* CalendarDemoTests */,
+				47F201E52147AE7600955C09 /* OCLint */,
 			);
 		};
 /* End PBXProject section */
@@ -436,6 +456,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		47F201E92147AE8800955C09 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh oclint_apply.sh CalendarDemo.xcworkspace CalendarDemo xcode";
+		};
 		8BD174FBA15D1337A8D19B36 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -761,6 +794,24 @@
 			};
 			name = Release;
 		};
+		47F201E62147AE7600955C09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GULEG3228R;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		47F201E72147AE7600955C09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GULEG3228R;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -787,6 +838,15 @@
 			buildConfigurations = (
 				479A9F631D9D3724001006EA /* Debug */,
 				479A9F641D9D3724001006EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		47F201E82147AE7600955C09 /* Build configuration list for PBXAggregateTarget "OCLint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47F201E62147AE7600955C09 /* Debug */,
+				47F201E72147AE7600955C09 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
